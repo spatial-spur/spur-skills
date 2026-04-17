@@ -1,0 +1,29 @@
+[project]
+name = "spur-skills"
+version = "0.1.0"
+description = "Install shared skills for coding agents"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "rich>=13",
+    "typer>=0.12",
+]
+
+[project.scripts]
+spur-skills = "spur_skills.cli:main"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.4.2",
+    "ruff>=0.13.0",
+    "ty>=0.0.18",
+]
+
+[build-system]
+requires = ["uv_build>=0.11.7,<0.12"]
+build-backend = "uv_build"
+
+[tool.uv.build-backend]
+module-root = "tool"
+data = ["skills"]
+source-include = ["skills/**", "tests/**"]
