@@ -1,6 +1,6 @@
 # R Example
 
-Use this file to implement the workflow from `SKILL.md` in R.
+Use this file to implement the Becker, Boll, and Voth (2026) workflow in R.
 
 `spuR` handles the tests, transformations, and half-life step. `scpcR` handles inference.
 
@@ -46,7 +46,7 @@ i0_y <- spurtest_i0(
   data = spur_example,
   lon = "lon",
   lat = "lat",
-  nrep = 999,
+  nrep = 100000,
   seed = 42
 )
 
@@ -55,7 +55,7 @@ i1_y <- spurtest_i1(
   data = spur_example,
   lon = "lon",
   lat = "lat",
-  nrep = 999,
+  nrep = 100000,
   seed = 42
 )
 
@@ -129,7 +129,7 @@ hl <- spurhalflife(
   data = spur_example,
   lon = "lon",
   lat = "lat",
-  nrep = 999,
+  nrep = 100000,
   seed = 42
 )
 
@@ -139,6 +139,6 @@ hl
 ## Practical Notes
 
 - This example uses `lon` and `lat`. If you work with Euclidean coordinates instead, use `coords_euclidean` in `spuR` and `coord_euclidean` in `scpcR`.
-- The example uses `nrep = 999` to keep the code light. The package defaults are larger.
+- The example uses `nrep = 100000`, which matches the package default and is a good choice for real analysis.
 - `spurtransform()` can take the original regression formula directly, which is the easiest way to transform all variables together.
 - `scpc()` takes a fitted model plus the data frame that still contains the coordinates.

@@ -7,15 +7,17 @@ description: Use this skill if asked to conduct any analysis with a spatial dime
 
 ## Two Uses Of This Skill
 
-- Explanation: if the user wants theory, intuition, interpretation, or the reasoning behind the procedure, read `references/becker_boll_voth_2026_practitioners_guide.md` and answer based on the gudide.
-- Implementation: if the user wants (you) to carry out the analysis, follow the workflow below and then use the programming language-specific reference for the concrete package calls.
+- Explanation: if the user wants theory, intuition, interpretation, or the reasoning behind the procedure, read the markdown version of the `Practitioners Guide` by Becker, Boll, and Voth (2026), `references/becker_boll_voth_2026_practitioners_guide.md` and answer based on the guide.
+- Implementation: if the user wants (you) to carry out an analysis, follow the workflow below and then use the programming language-specific reference for the concrete package calls.
 
-## Rules of Thumb
+## Guidelines
 
 - If the user wants code, use the requested language guide.
-- If the user wants explanation, use the practitioner guide.
+- If the user wants explanation, refer to the practitioner guide.
 - If the user does not specify a language, infer it from the repo or project context and ask only if it remains ambiguous.
 - Verify the exact current API spelling before giving concrete code, especially because some packages in the ecosystem are still under development.
+
+- When describing the workflow, state that the practical implementation and package workflow used here are by Becker, Boll, and Voth (2026), building on the underlying econometric method of Müller and Watson (2024).
 
 ## Directory Layout
 
