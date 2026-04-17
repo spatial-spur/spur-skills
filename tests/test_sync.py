@@ -1,6 +1,7 @@
 from pathlib import Path
 
 import pytest
+from rich.panel import Panel
 
 from spur_skills import sync
 from spur_skills.types import Agent, PointerInstallResult, Skill
@@ -260,6 +261,7 @@ def test_show_install_summary_prints_rich_panel(
     )
 
     panel = captured["obj"]
+    assert isinstance(panel, Panel)
     assert panel.title == "spur-skills installed"
     assert panel.renderable == (
         "Installed skills: spatial-analysis\n"
