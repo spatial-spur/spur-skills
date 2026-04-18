@@ -1,10 +1,8 @@
 import shutil
 from pathlib import Path
-
 import typer
 from rich.console import Console
 from rich.panel import Panel
-
 from spur_skills.types import Agent, PointerInstallResult, Skill
 
 
@@ -67,16 +65,6 @@ def render_pointer(skill: Skill) -> str:
     )
 
 
-def select_pointer_agents(agents: list[Agent]) -> list[Agent]:
-    """opencode reads skills from agents or claude
-    --> no need to install in separate opencode dir if either
-    of those are present"""
-    names = {agent.name for agent in agents}
-    if "opencode" in names and ("claude" in names or "agents" in names):
-        return [agent for agent in agents if agent.name != "opencode"]
-    return agents
-
-
 def install_pointer(skill: Skill, agent: Agent) -> None:
     """Install one pointer into one agent home."""
     reference_dir = reference_root() / skill.name
@@ -101,16 +89,13 @@ def install_pointers(
     skills: list[Skill], agents: list[Agent], yes: bool
 ) -> PointerInstallResult:
     """Install pointers into agent homes, prompting on conflicts when needed."""
-    selected_agents = select_pointer_agents(agents)
     installed_harnesses: set[str] = set()
     skipped_skills: set[str] = set()
     kept_harnesses: set[str] = set()
 
     for skill in skills:
         conflicts = [
-            agent
-            for agent in selected_agents
-            if (agent.skills_dir / skill.name).exists()
+            agent for agent in agents if (agent.skills_dir / skill.name).exists()
         ]
         if conflicts and not yes:
             names = ", ".join(agent.name for agent in conflicts)
@@ -122,7 +107,7 @@ def install_pointers(
                 kept_harnesses.update(agent.name for agent in conflicts)
                 continue
 
-        for agent in selected_agents:
+        for agent in agents:
             agent.skills_dir.mkdir(parents=True, exist_ok=True)
             install_pointer(skill, agent)
             installed_harnesses.add(agent.name)
