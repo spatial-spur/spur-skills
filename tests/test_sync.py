@@ -60,7 +60,7 @@ def test_install_pointers_writes_pointer_and_agents_only(
     pointer_dir = agent.skills_dir / "spatial-analysis"
     assert installed == PointerInstallResult(["codex"], [], [])
     assert pointer_dir.joinpath("SKILL.md").exists()
-    assert "spur-skills update -y" in pointer_dir.joinpath("SKILL.md").read_text(encoding="utf-8")
+    assert "spur-skills update -y" in pointer_dir.joinpath("SKILL.md").read_text(encoding="utf-8") # fmt: skip
     assert str(root / "spatial-analysis" / "SKILL.md") in pointer_dir.joinpath(
         "SKILL.md"
     ).read_text(encoding="utf-8")
