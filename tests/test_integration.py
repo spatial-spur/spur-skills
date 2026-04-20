@@ -5,7 +5,7 @@ from pathlib import Path
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-FAKE_HOME = REPO_ROOT / ".pycache" / "HOME"
+FAKE_HOME = REPO_ROOT / ".pytest_cache" / "HOME"
 TOOL_BIN_DIR = FAKE_HOME / ".local" / "bin"
 
 
