@@ -33,8 +33,7 @@ jobs:
             "ref": "main",
             "inputs": {
               "source_repo": "spatial-spur/spur-skills",
-              "source_ref": "${RELEASE_TAG}",
-              "source_slug": "spur-skills"
+              "source_ref": "${RELEASE_TAG}"
             }
           }
           EOF
