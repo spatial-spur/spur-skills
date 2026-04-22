@@ -25,12 +25,14 @@ below follows the current package API on `main`.
 install.packages("remotes")
 install.packages("geodist")
 
+remotes::install_github("spatial-spur/scpcR@v0.1.3")
 remotes::install_github("spatial-spur/spuR@v0.1.2")
 ```
 
 `geodist` is needed here because the example uses longitude and latitude
-coordinates. `scpcR` is installed as a dependency of `spuR`, so you do not need
-to install it separately.
+coordinates. GitHub installation does not guarantee the declared `scpcR`
+version is updated, so make sure both versions are up to date by installing
+the *latest* tagged version of each package explicitly.
 
 ## Worked Example: `am ~ gini + fracblack`
 
