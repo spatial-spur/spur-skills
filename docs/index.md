@@ -61,6 +61,7 @@ supported agent homes already exist locally.
 
 - `spatial-analysis`: core reference for the agent to know its way around the packages' functions 
 - `spur-skills`: reference for the agent to know how to use the `spur-skills` tool itself
+- `spur-issues`: reference for the agent to help create issues and PRs across the `spur` repositories
 
 ## Useful commands
 

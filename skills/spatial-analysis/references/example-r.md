@@ -25,7 +25,7 @@ below follows the current package API on `main`.
 install.packages("remotes")
 install.packages("geodist")
 
-remotes::install_github("spatial-spur/spuR@v0.1.1")
+remotes::install_github("spatial-spur/spuR@v0.1.3")
 ```
 
 `geodist` is needed here because the example uses longitude and latitude
