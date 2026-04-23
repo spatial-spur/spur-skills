@@ -2,11 +2,9 @@
 
 Use this file to implement the Becker, Boll, and Voth (2026) workflow in Stata.
 
-The `spur` package handles the SPUR diagnostics, transformations, and half-life
-step. The `scpc` package handles inference.
-
-Stata does not yet expose a top-level `spur` pipeline wrapper. This reference
-therefore shows the individual commands directly. A wrapper is planned.
+The `spur` package provides the full OLS pipeline wrapper plus the individual
+SPUR diagnostics, transformations, and half-life commands. The `scpc` package
+handles inference.
 
 For the `spur` API, see:
 
@@ -24,7 +22,7 @@ syntax below follows the current package API on `main`.
 
 ```stata
 ssc install moremata, replace
-net install spur, replace from(https://raw.githubusercontent.com/spatial-spur/spur-stata/v0.1.0b1/)
+net install spur, replace from(https://raw.githubusercontent.com/spatial-spur/spur-stata/v0.1.1/)
 
 cap ado uninstall scpc
 net install scpc, from("https://raw.githubusercontent.com/ukmueller/SCPC/master/src")
@@ -34,12 +32,12 @@ net install scpc, from("https://raw.githubusercontent.com/ukmueller/SCPC/master/
 
 ## Worked Example: `am gini fracblack`
 
-Stata does not yet expose a top-level `spur` wrapper. For now, run the same
-workflow as a direct command sequence. A wrapper is planned.
+Use the `spur` wrapper when you want the full OLS workflow in one command. Use
+the individual commands when you want only selected tests, transformations, or
+the final inference step (scpc).
 
 Also note that IV and absorbed fixed effects enter only at the `scpc` stage in
-Stata. The `spur` package provides the unit-root tests, transformations, and
-half-life command, but not a separate IV pipeline wrapper.
+Stata. The `spur` wrapper is OLS-only.
 
 This example assumes your data already contain:
 
@@ -57,7 +55,20 @@ rename lon s_2
 set seed 42
 ```
 
-### Example with individual commands
+### Example with pipeline wrapper
+
+```stata
+spur am gini fracblack, q(15) nrep(100000) latlong replace
+```
+
+The wrapper runs the four SPUR diagnostics, estimates the levels regression,
+runs `scpc`, transforms the dependent and independent variables with the
+default `lbmgls` transformation, estimates the transformed regression, and runs
+`scpc` again. It currently applies lbmgls transformation; if the user wants
+something else, he would need to orchestrate this from the individual test
+commands instead of the pipeline wrapper.
+
+### Example with individual test functions
 
 #### Step 1: test the dependent variable
 
@@ -152,9 +163,9 @@ see the docs linked at the top and the external `SCPC` help file.
   intervals. Larger values reduce simulation noise.
 - `latlong`: tells `spur` and `scpc` to interpret `s_1` and `s_2` as latitude
   and longitude rather than Euclidean coordinates.
-- `prefix(h_)`: the prefix used for transformed variables created by
+- `prefix(h_)`: the prefix used for transformed variables created by `spur` or
   `spurtransform`, such as `h_am` and `h_gini`.
-- `transformation(lbmgls)`: the spatial transformation applied by
+- `transformation(lbmgls)`: the spatial transformation applied by `spur` or
   `spurtransform`. `lbmgls` is the default empirical branch shown here.
 - `replace`: lets `spurtransform` overwrite existing transformed variables so
   the example can be rerun cleanly.
@@ -170,6 +181,6 @@ see the docs linked at the top and the external `SCPC` help file.
   to inference that does not condition on the realized regressors.
 - `cvs`: requests extra SCPC critical values in addition to the default 95%
   interval output.
-- `spur`: there is no top-level `spur` wrapper in Stata yet. IV and fixed
-  effects are handled at the estimation plus `scpc` step, not through a
-  separate SPUR pipeline command.
+- `spur`: the full OLS pipeline wrapper. It runs diagnostics, levels inference,
+  the `lbmgls` transformation, and transformed inference. IV and fixed effects
+  are still handled through direct estimation plus `scpc`.
