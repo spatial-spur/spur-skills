@@ -64,8 +64,8 @@ pipeline = spur(
 
 print(pipeline.summary())
 print(pipeline.tests.i0.summary())
-print(pipeline.fits.levels.scpc.scpcstats)
-print(pipeline.fits.transformed.scpc.scpcstats)
+print(pipeline.fits.levels.scpc)
+print(pipeline.fits.transformed.scpc)
 ```
 
 `pipeline.tests` contains the four SPUR diagnostics, and `pipeline.fits`
@@ -129,7 +129,7 @@ scpc_levels = scpc(
     cvs=True,
 )
 
-print(scpc_levels.scpcstats)
+print(scpc_levels)
 ```
 
 #### Step 2B: transformed branch
@@ -161,7 +161,7 @@ scpc_transformed = scpc(
     cvs=True,
 )
 
-print(scpc_transformed.scpcstats)
+print(scpc_transformed)
 ```
 
 ## SCPC-only: IV / FE example
@@ -213,12 +213,16 @@ out_iv = scpc(
     cvs=True,
 )
 
-print(out_iv.scpcstats)
+print(out_iv) # from >=v0.1.2
 ```
 
 If the SPUR decision rule tells you to transform the specification first,
 transform the outcome, regressors, and instrument together and then fit the IV
 model on those transformed variables before calling `scpc()`.
+
+From `scpc-python>=0.1.2`, `scpc()` results also provide R-like helpers for
+named access: `coef()`, `confint()`, and `summary()`. Raw arrays remain
+available as `scpcstats` and `scpccvs` when lower-level access is needed.
 
 ## Optional: Half-Life
 
