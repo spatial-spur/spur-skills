@@ -1,4 +1,10 @@
+<div class="package-overview-header" markdown="1">
+
 # spur-skills
+
+[GitHub repository](https://github.com/spatial-spur/spur-skills){ .md-button }
+
+</div>
 
 `spur-skills` is a `uv tool` managing the installation and updating of our agent-skills. 
 
