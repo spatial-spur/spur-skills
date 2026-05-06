@@ -1,0 +1,29 @@
+cff-version: 1.2.0
+message: "If you use spur-skills, please cite Becker, Boll, and Voth (2026)."
+title: "SPUR-Skills"
+version: "0.1.6"
+license: MIT
+repository-code: "https://github.com/spatial-spur/spur-skills"
+url: "https://github.com/spatial-spur/spur-skills"
+abstract: "Installable coding-agent skills for the SPUR and SCPC ecosystem."
+authors:
+  - family-names: Becker
+    given-names: "Sascha O."
+  - family-names: Boll
+    given-names: "P. David"
+  - family-names: Voth
+    given-names: "Hans-Joachim"
+preferred-citation:
+  type: article
+  authors:
+    - family-names: Becker
+      given-names: "Sascha O."
+    - family-names: Boll
+      given-names: "P. David"
+    - family-names: Voth
+      given-names: "Hans-Joachim"
+  title: "Testing and Correcting for Spatial Unit Roots in Regression Analysis"
+  journal: "The Stata Journal"
+  year: 2026
+  notes: "In press"
+  url: "https://wrap.warwick.ac.uk/id/eprint/194576/"
